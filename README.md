@@ -31,11 +31,12 @@ Originally I was looking for a small pure js( not one of the js frameworks or a 
 
 #### Install
 
-Simply download the file and place it somewhere appropriate in your project structure.  The easiest place for testing purposes is in the same location as the html file that has your table(s).  In the header or at the the bottom of your html body section, insert a reference to the script. e.g.
+Simply download the file and place it somewhere appropriate in your project structure.  The easiest place for testing purposes is in the same location as the html file that has your table(s).  In the header or at the bottom of your html body section, insert a reference to the script. e.g.
 
 `<script src="sort_js_tables.js"></script>`
 
 On windows, if testing on your local machines and you want to keep the js in a different directory structure altogether, you could fully reference it as per below;
+
 `<script src="file:///C:/Path/to/your/file/sorting_js_tables.js"></script>`
 
 #### Updating the table attributes
@@ -74,7 +75,7 @@ I will assume the table has a header block for documentation purposes.  Example 
       </tr>
 ```
 
-The minimum needed is a `onclick="sortTableColumn(event, 0)"`attribute in each column you wish to sort.  If you do not add any other attributes, the column will be sorted as text, case insensitve.  The first parameter to the function is always `event`. The 2nd parameter is the column number.  Numbering starts from 0.  Yes, if, you put in the wrong column number, a different column will be sorted; - save it for April 1st.
+The minimum needed is a `onclick="sortTableColumn(event, n)"`attribute in each column you wish to sort.  If you do not add any other attributes, the column will be sorted as text, case insensitve.  The first parameter to the function is always `event`. The 2nd parameter is the column number.  Numbering starts from 0.  Yes, if, you put in the wrong column number, a different column will be sorted; - save it for April 1st.
 
 #### Data Tags
 
@@ -132,6 +133,12 @@ The below table does not have `<thead>`block.  The column headings are simply th
       </tr>
 ```
 
+### Inner Working
+
+The function is not trying to clean the data.  The original  data displayed will be the same data displayed back after sorting.  With the numbers, if data-dp=","( or whatever you have set as the decimal point), regex is utilized to tease out just the numbers and whatever has been set as the dp.  Therefore something like 123a,23 will become 123.23 and get sorted as a valid number.  If data-type is "num" and the data-dp is also not set, then it will be a strict number check and 123a,23 will be a NaN(Not a number) and sink to the bottom.
+
+There is not CSS-styling, or feedback provided after the click.  For small tables, it won't be an issue as the sorted table will refresh immediately.  However, for large tables, a little feedback would be useful.
+
 ## TODO List ( in no particualar order )
 
 * Add data-tag(s) and functionality for dates
@@ -139,10 +146,12 @@ The below table does not have `<thead>`block.  The column headings are simply th
 * Add functionality for `compareLocal()` so that alphabets other than English are catered for properly
 * Multi-column sort
 * Some initial CSS styling
+* Provide some sort of feedback that the sort is on-going.  Important for very large tables.
+* Consider removing the onclick=funcname() in the HTML and just use a class or id attribute to identify tables that need sorting.
 
 ## Performance
 
-Internally, the function uses the `Array.prototype.sort()` method to sort the columns.  This is very quick.  I have tested with a table of 10 columns as per below...
+Internally, the function uses the `Array.prototype.sort()` method to sort the columns.  This is very quick.  I have tested with a table of 10( actually 11 now) columns with data similar to the below...
 
 | Case Sensitive Sort | Random Integers | Rand floats  | Pos Ints  | Scientific  | Scientific as full number      | Case InSensitive Sort | Currency         |  Accounting         | Currency dp comma |
 |---------------------|-----------------|--------------|-----------|-------------|--------------------------------|-----------------------|------------------|---------------------|-------------------|
@@ -157,3 +166,5 @@ Internally, the function uses the `Array.prototype.sort()` method to sort the co
 
 For that reason, when re-building the sorted DOM tree, I have put in an arbitary Timeout of 10ms after 500 rows.  Rebuilding the DOM tree is the last step after sorting.  The break gives the system an opportunity to step in and render the results thus far before re-attaching and displaying the remaining rows.  500 is probably excessive as most tables are not that large anyway.   Also, in term of display, normally it is 20 to 30 rows at a time, not a full table.  However, as far as the user is concerned, s/he has got instantaneous feedback on 10 000 rows of data.
 
+## Contributions
+Contributions are welcome whether it is highlighting bugs, contributing to the code or improving the Readme.  The reason I empahsize the pure JS aspect is because I am not familiar with any of the JS frameworks!  So if anyone knows how to make it available/play nice or whatever the correct terminology is to Vue, React, Node, etc. it would be a welcome contribution.  In addition, if anyone has any insights into how to make the DOM tree rebuild quicker post sort, that would also be very welcome. 
