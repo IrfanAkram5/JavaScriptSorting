@@ -1,57 +1,9 @@
 /*  Written by  : Irfan Akram
     Date        : 25/12/2021
     License     : GNU GPLv3
-    Descritption: Sort table columns by ascending and descending order.  See readme for attribute tags you need to utilize.  Meant for basic tables. First <tr> attribute is assumed to be the header row - so it is not necessary that a <thead> block exists.
-
-    Example table structure should be something like the below:
-    <table id="your id" class="yourclassname">
-                    <thead>
-                        <tr>
-                            <th data-type="txt" data-case-sensitive="true" data-sort="asc"
-                                onclick="sortTableColumn(event, 0)">Column1</th>
-                            <th data-type="txt" data-case-sensitive="false" data-sort="desc"
-                                onclick="sortTableColumn(event, 1)">Column2</th>
-                            <th data-type="num" data-sort="asc" onclick="sortTableColumn(event, 2)">Column</th>
-                            <th data-type="num" data-sort="desc" onclick="sortTableColumn(event, 3)">Column</th>
-                        </tr>
-                    </thead>
-                    <tbody id="your id">
-                        
-                        <tr>
-                            <td>your data</td>
-                            <td>your data</td>
-                            etc.
-                        </tr>
-
-                        .....repeat for howerver many data rows ....
-                        
-                        <tr>
-                            <td>your data</td>
-                            <td>your data</td>
-                            etc.
-                        </tr>
-                        
-                    </tbody>
-
-                </table>
-
-    Add onclick="sortTableColumn(event, n) to event every column you want to be able to sort - The first parameter is always "event".  The second parameter "n" is the column position. Yes, assigning wrong numbers will lead to different columns being sorted - save it for April 1st. Numbering starts from 0.  This is the only mandatory attribute you need to add for a sort to occur.  If data tags are not supplied, it will default to a text, case insensitve sort.
-
-    data tags are as follows:
-
-    data-type: "txt" or "num" "acc".  -> sort the column as text or number.  "acc" is a also sorted ultimately as a number but assumes (124.45) is representing negative numbers
-    data-case-sensitive: "true" or "false".  Works in conjunction with "data-type = txt" tag.  Defaults to false if not supplied
-    data-sort: "asc" or "desc".  Ascending or Descending.  Initial ordering.  Will flip to opposite on next click.  Defaults to "asc" if not supplied
-    data-dp(decimal point): Works in conjunction with "num" and "acc" data-types.  Supply it if yor are formatting number, e.g. thousands sepearators, currency symbols, etc. OR if the decimal point is not a decimal point.  E.g. European convention is to use "," as the decimal point. Default value for dp is "."
-
-    IMPORTANT:  For num data type, any + or - sign should be at the beginning of a number, not the end.  e.g.
-    +123.45 => OK
-    123.45+ => INCORRECT, will result in a Not a Number(NaN) with Javascript
-
-    Thus far, only dealing with text and numbers.  Hopefully, I will get around to adding Dates as well!
+    Description : Sort table columns by ascending and descending order.  See readme for attribute tags you need to utilize.  Meant for basic tables. First <tr> attribute is assumed to be the header row - so it is not necessary that a <thead> block exists.
     
-
-    */
+*/
 
 function append_number(element, index_pos, arrayGoodValues, arrayBadValues) {
     if (Number.isNaN(Number(element))) {
@@ -235,7 +187,7 @@ function sortTableColumn(hdrRow, colPos) {
     const parentNodeVal = tablebody[0].parentNode
     tablebody.forEach((element) => { element.remove() })
 
-    /* Re-attaching all the nodes is more time consuming than the actual sorting for large table.  Arbitary setting for large table is > 500 rows. If so, add in a small delay so the user gets an "immediate" result of the first 1000 rows, and then append the rest */
+    /* Re-attaching all the nodes is more time consuming than the actual sorting for large table.  Arbitary setting for large table is > 500 rows. If so, add in a small delay so the user gets an "immediate" result of the first 500 rows, and then append the rest */
     if (sortedRows.length < 500) {
         sortedRows.forEach(element => { parentNodeVal.appendChild(element) });
     } else {
