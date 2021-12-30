@@ -2,7 +2,8 @@
     Date        : 25/12/2021
     License     : GNU GPLv3
 
-    Python Utility script to upload a CSV file and download a html table using pandas.  Paths are for windows OS.  Use os.path to build path names if you want to work across platforms.  
+    Python Utility script to upload a CSV file and download a html table using pandas.  Paths are for windows OS.  Use os.path to build path names 
+    if you want to work across platforms.  
     
     ***Note*** pandas will have a go at making sense of the data as well if dtype="str" is not passed. 
     """
