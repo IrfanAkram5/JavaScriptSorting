@@ -76,16 +76,19 @@ I will assume the table has a header block for documentation purposes.  Example 
 
 The minimum needed is a `onclick="sortTableColumn(event, 0)"`attribute in each column you wish to sort.  If you do not add any other attributes, the column will be sorted as text, case insensitve.  The first parameter to the function is always `event`. The 2nd parameter is the column number.  Numbering starts from 0.  Yes, if, you put in the wrong column number, a different column will be sorted; - save it for April 1st.
 
-##### Data Tags
+#### Data Tags
 
 The data tags help the function resolve the data type it is dealing with and how to process the elements.
 
 **data-type**: Allowed values are "num", "txt" or "acc" for number, text and accounting respectively.  "txt" is the default value if no data-type attribute is set.
+
 **data-case-sensitive**: "true" or "false".  Only relevant if data-type="txt" is set.  If case sensitive is false, everything is coverted to lowercase before sorting.
+
 **data-dp**: Only relevant with "num" and "acc" data types.  Specifies what to use as a decimal point. ***Always*** set this value if the decimal point is not a dot(".") ***or*** if the column does not consist of only digits and a decimal point.  Setting this attribute triggers additional regex processing to separate the numbers from the other characters.
+
 ***data-sort***: "asc" or "desc".  Whether sort is ascending or descending first time round.  Subsequently, it will flip to the opposite. 
 
-###### Numbers - further info
+#### Numbers - further info
 
 Whilst a + or - sign in front of a number is OK, a + or - at the end of a number is not. e.g.
 
@@ -94,7 +97,7 @@ Whilst a + or - sign in front of a number is OK, a + or - at the end of a number
 Accounting convention is to surround negative numbers with brackets whilst postive number are without brackets. e.g.
 (123,124.98) is equivalent to -123.124.98.  Ergo, there is no need to have + or - signs if using this convention.
 
-##### Table with body only
+#### Table with body only
 
 The below table does not have `<thead>`block.  The column headings are simply the first row in the `<tbody>` block.
 
@@ -135,6 +138,7 @@ The below table does not have `<thead>`block.  The column headings are simply th
 * Add data-tag(s) and functionality for timestamps
 * Add functionality for `compareLocal()` so that alphabets other than English are catered for properly
 * Multi-column sort
+* Some initial CSS styling
 
 ## Performance
 
