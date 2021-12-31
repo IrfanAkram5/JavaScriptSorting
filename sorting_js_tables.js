@@ -1,7 +1,7 @@
 /*  Written by  : Irfan Akram
     Date        : 25/12/2021
     License     : GNU GPLv3
-    Github Location: 
+    Github Location: https://github.com/IrfanAkram5/JavaScriptSorting
 
     Description : Sort table columns by ascending and descending order.  See readme at https://github.com/IrfanAkram5/JavaScriptSorting for a detailed readme and example code. Meant for basic tables. First <tr> attribute is assumed to be the header row, so header row can be in <thead> or <tbody>
 
