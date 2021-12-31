@@ -1,6 +1,7 @@
 """ Written by  : Irfan Akram
     Date        : 25/12/2021
     License     : GNU GPLv3
+    Github Location: https://github.com/IrfanAkram5/JavaScriptSorting
 
     Python Utility script to upload a CSV file and download a html table using pandas.  Paths are for windows OS.  Use os.path to build path names 
     if you want to work across platforms.  
