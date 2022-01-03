@@ -25,7 +25,7 @@ if __name__ == "__main__":
     df_100 = df_all[:100]
     df_1000 = df_all[:1000]
 
-    #Download the file to local director.
+    #Download the file to local directory.
     df_100.to_html(buf=html_file_100, index=False, classes=None, table_id=None)
     df_1000.to_html(buf=html_file_1k, index=False, classes=None, table_id=None)
     df_all.to_html(buf=html_file_10k, index=False, classes=None, table_id=None)
