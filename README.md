@@ -43,7 +43,7 @@ On windows, if testing on your local machines and you want to keep the js in a d
 
 I will assume the table has a header block for documentation purposes.  Example without header is also shown further below.  The function assumes that the very first `<tr>` tag whether it be in the `<thead>` block or in the `<tbody>` block is the header.
 
-```
+```html
 
 <table style="border: solid;">
     <thead>
@@ -100,9 +100,9 @@ Accounting convention is to surround negative numbers with brackets whilst posti
 
 #### Table with body only
 
-The below table does not have `<thead>`block.  The column headings are simply the first row in the `<tbody>` block.
+The below table does not have a `<thead>`block.  The column headings are simply the first row in the `<tbody>` block.
 
-```
+```html
 
 <table style="border: solid;">
 
@@ -137,7 +137,7 @@ The below table does not have `<thead>`block.  The column headings are simply th
 
 The function is not trying to clean the data.  The original  data displayed will be the same data displayed back after sorting.  With the numbers, if data-dp=","( or whatever you have set as the decimal point), regex is utilized to tease out just the numbers and whatever has been set as the dp.  Therefore something like 123a,23 will become 123.23 and get sorted as a valid number.  If data-type is "num" and the data-dp is also not set, then it will be a strict number check and 123a,23 will be a NaN(Not a number) and sink to the bottom.
 
-There is not CSS-styling, or feedback provided after the click.  For small tables, it won't be an issue as the sorted table will refresh immediately.  However, for large tables, a little feedback would be useful.
+Currently, there is no CSS-styling, or feedback provided after the click.  For small tables, it won't be an issue as the sorted table will refresh immediately.  However, for large tables, a little feedback would be useful to let users know something is happening.
 
 ## TODO List ( in no particualar order )
 
