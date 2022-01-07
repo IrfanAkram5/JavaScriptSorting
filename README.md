@@ -13,7 +13,7 @@ Simply add an onclick attribute to the headings' table row along with the approp
 
 Does not do multi-column sort(yet!).
 
-Fast - See performance section for further info stats.
+Fast but see performance section for caveats. The limiting factor for responsiveness is not the sorting but the layout rendering times for very large tables.
 
 ## Requirements
 
@@ -145,13 +145,13 @@ Currently, there is no CSS-styling, or feedback provided after the click.  For s
 * Add data-tag(s) and functionality for timestamps
 * Add functionality for `compareLocal()` so that alphabets other than English are catered for properly
 * Multi-column sort
-* Some initial CSS styling
-* Provide some sort of feedback that the sort is on-going.  Important for very large tables.
+* Some initial CSS styling :white_check_mark:
+* Provide some sort of feedback that the sort is on-going.  Important for very large tables. :white_check_mark:
 * Consider removing the onclick=funcname() in the HTML and just use a class or id attribute to identify tables that need sorting.
 
 ## Performance
 
-Internally, the function uses the `Array.prototype.sort()` method to sort the columns.  This is very quick.  I have tested with a table of 10( actually 11 now) columns with data similar to the below...
+Internally, the function uses the `Array.prototype.sort()` method to sort the columns.  This is very quick.  The function with 11 columns similar to the below has been tested with .....
 
 | Case Sensitive Sort | Random Integers | Rand floats  | Pos Ints  | Scientific  | Scientific as full number      | Case InSensitive Sort | Currency         |  Accounting         | Currency dp comma |
 |---------------------|-----------------|--------------|-----------|-------------|--------------------------------|-----------------------|------------------|---------------------|-------------------|
@@ -162,9 +162,12 @@ Internally, the function uses the `Array.prototype.sort()` method to sort the co
 | PoEm                | 940             | grrrr        | 245609103 | 4.33388E+20 | 433,387,512,598,271,000,000.00 | PoEm                  | -£913,463,328.55 |  £ (12,052,649.43)  | £ 158.095.168,71  |
 | halFwAY             | 264             | 629.0290062  | 480684850 | 3.05075E+20 | 305,075,417,621,948,000,000.00 | halFwAY               | £636,864,862.75  |  £ 12,478,937.45    | (                 |
 
-... with 100, 1000 and 10 000 rows of randomized values all fully rendered/displayed in the browser.  Anything upto 1000 rows fully displayed should be no issue for any modern latop in terms of responsiveness, regardless of processor.  i.e. you click on a column heading and in human terms, the full response cycle post click of process click, parse values, sort values, rebuild DOM tree and display appears instantaneous.  The responsiveness issue only comes into play if you insist on displaying an entire table of say 10 000 rows in one go.  In that case, the user sees and feels a noticeable delay(Anything more than a second).
+... with 100, 1000 and 10 000 rows of randomized values all fully rendered/displayed in the browser.  Anything up to 1000 rows fully displayed should be no issue for any modern latop in terms of responsiveness, regardless of processor.  i.e. you click on a column heading and in human terms, the full response cycle post click of process click, parse values, sort values, rebuild DOM tree and display appears instantaneous.  The responsiveness issue only comes into play with large table ( over 10 000 rows ) and 10+ columns.  In this scenario, table rendering is 80%-90% of the total elapsed time.  Few columns will reduce it.  In the test folder, there is a 10k file with 2 cols and a 10k file with 11 columns.  The 2 response for 2 column is about 50% faster.
 
-For that reason, when re-building the sorted DOM tree, I have put in an arbitary Timeout of 10ms after 500 rows.  Rebuilding the DOM tree is the last step after sorting.  The break gives the system an opportunity to step in and render the results thus far before re-attaching and displaying the remaining rows.  500 is probably excessive as most tables are not that large anyway.   Also, in term of display, normally it is 20 to 30 rows at a time, not a full table.  However, as far as the user is concerned, s/he has got instantaneous feedback on 10 000 rows of data.
+For very large tables (10k rows and over), you would need to decide whetehr the total response time is acceptable or not.  If not, you will need to implement some sort of pagination where the total table is kept in on the server or client side in cache, and then generate on the fly the necessary number of row for whereever you are in the table.  Although a lot more overhead, it will still be more responsive than rendering very large tables.
+
+See the demo page at... for an idea of different response time for different volumes of data.
+
 
 ## Contributions
 Contributions are welcome whether it is highlighting bugs, contributing to the code or improving the Readme.  The reason I empahsize the pure JS aspect is because I am not familiar with any of the JS frameworks!  So if anyone knows how to make it available/play nice or whatever the correct terminology is to Vue, React, Node, etc. it would be a welcome contribution.  In addition, if anyone has any insights into how to make the DOM tree rebuild quicker post sort, that would also be very welcome. 

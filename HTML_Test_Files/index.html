@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+
+    <title>Table Sort</title>
+
+    <script src="JS_Files/load_data_tables.js"></script>
+
+</head>
+
+<body>
+    <section class="hero is-small is-warning">
+        <div class="hero" style="padding: 10px;">
+
+            <div class="columns is-desktop">
+                <div class="column is-two-fifths">
+                    <div class="block">
+                        <button class="button is-link" type="button" name="HtmlTable100"
+                            onclick="loadTableData(event)">Load
+                            100
+                            rows</button>
+                        <button class="button is-link" type="button" name="HtmlTable1k"
+                            onclick="loadTableData(event)">Load
+                            1,000
+                            rows</button>
+                        <button class="button is-link" type="button" name="HtmlTable10k"
+                            onclick="loadTableData(event)">Load
+                            10,000
+                            rows</button>
+                        <div class="block"></div>
+                        <button class="button is-link" type="button" name="HtmlTable10k2col"
+                            onclick="loadTableData(event)">Load
+                            10k 2 columns </button>
+                    </div>
+                    <div class="content">
+                        <!-- <div class="content" style="padding-top: 5px;"> -->
+                        <h4 id="HeadingH2">Click on one of the above buttons to load data</h4>
+                    </div>
+                    <div class="field is-grouped is-grouped-multiline">
+                        <div class="control">
+                            <div class="tags has-addons">
+                                <span class="tag is-dark">parsing time</span>
+                                <span id="parse" class="tag is-info">0ms</span>
+                            </div>
+                        </div>
+
+                        <div class="control">
+                            <div class="tags has-addons">
+                                <span class="tag is-dark">sorting time</span>
+                                <span id="sort" class="tag is-success">0ms</span>
+                            </div>
+                        </div>
+
+                        <div class="control">
+                            <div class="tags has-addons">
+                                <span class="tag is-dark">re-attach2DOM time</span>
+                                <span id="attach" class="tag is-danger">0ms</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="column">
+                    <div class="card">
+                        <header class="card-header">
+                            <p class="card-header-title">Sorting JS Tables</p>
+                        </header>
+                        <div class="card-content">
+                            <div class="content" style="font-size: small;">
+                                Click on the header to sort by that column. As the number of rows
+                                increase, building and rendering the table/DOM takes an increasingly disproportionate time. For 10,000 rows, the actual sorting
+                                is a tiny fraction of the time it takes to rebuild the DOM and system rendering. Number of columns also plays a factor. 10,000 rows with 2 columns takes 50% of the time of 11 columns.  A pretty good indication of overall time for the process to complete is simply the time it takes to load the initial file as rendering the table is the biggest time consumer, not the sorting!  Beyond the scope of this demo, but for very large tables, the best strategy will be some type of pagination.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="section">
+        <div style="display: block; max-height: 35vmax; overflow-y: scroll; overflow-x: scroll; font-size: small;">
+            <div id="t1">
+                <!-- Table will be inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <script src="../sorting_js_tables.js"></script>
+</body>
+
+</html>

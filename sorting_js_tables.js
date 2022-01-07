@@ -46,19 +46,42 @@ function findAndReplace_dp(result_array, str_dp_value) {
     }
 }
 
-
 // Entry point for  onclick is here.
 function sortTableColumn(hdrRow, colPos) {
 
+    const db = document.getElementsByTagName("body")[0];
+    db.style.cursor = "progress";
+
+    var currentTarget = hdrRow.currentTarget.closest("table")
+
+    // Timout to allow the system to step in and change cursor before running mainprocess
+    // which will not cede control until the end.
+    // Increase the timeout if cursor is not always changing - delay is not long enought to allow
+    // the system to complete prior tasks -> going to be loosely proportional to the size of the table.
+    setTimeout(() => {
+        //split out table between header row and body rows - assume 1st row is header
+        var tablebody = Array.from(currentTarget.rows)
+        var hdrrow = tablebody.shift()  //removes header row from table body
+        var hdrinfo = hdrrow.children[colPos]
+        mainprocess(tablebody, hdrrow, hdrinfo, colPos);
+        db.style.cursor = "";
+
+        sessionStorage.setItem('st_DOMreattach', performance.now());
+        let myevent = new CustomEvent('sortTable_timers')
+        document.dispatchEvent(myevent);
+
+    }, 35);
+}
+
+
+function mainprocess(tablebody, hdrrow, hdrinfo, colPos) {
     const datatypes = {
         txt: "text",
         num: "number",
         acc: "accounting"
     }
-    //split out the table rows between header row and body. First row is header
-    var tablebody = Array.from(hdrRow.currentTarget.closest("table").rows)
-    var hdrrow = tablebody.shift()  //removes header row from table body
-    var hdrinfo = hdrrow.children[colPos]
+    //Capture times to monitor performance
+    let sortTable_entry = performance.now()
 
     //set defaults
     var num_apply_regex = true;
@@ -179,6 +202,8 @@ function sortTableColumn(hdrRow, colPos) {
         }
     }
 
+    let sortTable_parsing = performance.now()
+
     //Now sort the items 
     switch (datatype) {
         case "num" || "acc":
@@ -206,30 +231,27 @@ function sortTableColumn(hdrRow, colPos) {
             break;
     }
 
+    let sortTable_sorting = performance.now()
+
     sortedRows = []  //create new table with all items in order with Nan's at the bottom
     toBeSorted.forEach(element => { sortedRows.push(tablebody[element.originalIdxPos]) });
     NanList.forEach(element => { sortedRows.push(tablebody[element.originalIdxPos]) });
 
     //remove all rows from tbody and add back in sorted order
     const parentNodeVal = tablebody[0].parentNode
-    tablebody.forEach((element) => { element.remove() })
+    //tablebody.forEach((element) => { element.remove() })
 
-    /* Re-attaching all the nodes is more time consuming than the actual sorting for a large table.  Arbitary setting for large table is > 500 rows. If so, add in a small delay so the user gets an "immediate" result of the first 500 rows, and then append the rest. */
-    if (sortedRows.length < 500) {
-        sortedRows.forEach(element => { parentNodeVal.appendChild(element) });
-    } else {
+    //parentNodeVal.replaceChildren();
+    parentNodeVal.replaceChildren(...sortedRows);
 
-        for (let index = 0; index < 500; index++) {
-            const element = sortedRows[index];
-            parentNodeVal.appendChild(element);
-        }
+    //Re-attaching all the nodes is much more time consuming than the actual sorting for a large table.  
+    //sortedRows.forEach(element => { parentNodeVal.appendChild(element) });
+    var sortTable_DOMReattach = performance.now();
 
-        setTimeout(() => {
-            for (let index = 500; index < sortedRows.length; index++) {
-                const element = sortedRows[index];
-                parentNodeVal.appendChild(element);
-            }
-        }, 10)
-    }
+    // local session storage - > st ==> sortTable
+    // Persistance is until tab is closed
+    sessionStorage.setItem('st_entry', sortTable_entry);
+    sessionStorage.setItem('st_parse', sortTable_parsing);
+    sessionStorage.setItem('st_sort', sortTable_sorting);
 
 }

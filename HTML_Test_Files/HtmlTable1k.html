@@ -1,17 +1,17 @@
-<table border="1" class="dataframe">
+<table border="1" class="dataframe table is-narrow is-hoverable">
   <thead>
-    <tr style="text-align: right;">
-      <th>Case Sensitive Sort</th>
-      <th>Random Integers</th>
-      <th>Rand floats</th>
-      <th>Pos Ints</th>
-      <th>Scientific</th>
-      <th>Scientific as full number</th>
-      <th>Case InSensitive Sort</th>
-      <th>Currency</th>
-      <th>Accounting</th>
-      <th>Currency dp comma</th>
-      <th>Col F with dp = comma</th>
+    <tr style="text-align: center;">
+      <th data-type="txt" data-case-sensitive="true" onclick="sortTableColumn(event, 0)">Case Sensitive</th>
+      <th data-type="num" onclick="sortTableColumn(event, 1)">Random Int</th>
+      <th data-type="num" onclick="sortTableColumn(event, 2)">Rand floats</th>
+      <th data-type="num" onclick="sortTableColumn(event, 3)">Pos Ints</th>
+      <th data-type="num" onclick="sortTableColumn(event, 4)">Scientific</th>
+      <th data-type="num" data-dp="." onclick="sortTableColumn(event, 5)">Scientific as full number</th>
+      <th data-type="txt" data-case-sensitive="false" onclick="sortTableColumn(event, 6)">Case InSensitive</th>
+      <th data-type="num" data-dp="." onclick="sortTableColumn(event, 7)">Currency</th>
+      <th data-type="acc" data-dp="." onclick="sortTableColumn(event, 8)">Accounting</th>
+      <th data-type="acc" data-dp="," onclick="sortTableColumn(event, 9)">Currency dp comma</th>
+      <th data-type="num" data-dp="," onclick="sortTableColumn(event, 10)">Col F with dp = comma</th>
     </tr>
   </thead>
   <tbody>

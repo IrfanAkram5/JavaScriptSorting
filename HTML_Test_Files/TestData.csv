@@ -1,4 +1,4 @@
-Case Sensitive Sort,Random Integers,Rand floats,Pos Ints,Scientific,Scientific as full number,Case InSensitive Sort,Currency, Accounting ,Currency dp comma,Col F with dp = comma
+Case Sensitive,Random Int,Rand floats,Pos Ints,Scientific,Scientific as full number,Case InSensitive,Currency, Accounting ,Currency dp comma,Col F with dp = comma
 qUeEn,55,-23.94500826,595608435,5.90126E+20,"590,125,556,832,839,000,000.00",qUeEn,"£316,320,450.62"," £ 57,544,687.20 ",£1.00,"590.125.556.832.839.000.000,00"
 pArt,671,21.85758178,660702077,123,"99,874,271,899,915,900,000.00",,," £ 236,018,527.99 ","£ 435.525.148,47","99.874.271.899.915.900.000,00"
 GuIde,73,817.4082187,,2.45412E+20,"245,411,763,867,806,000,000.00",GuIde,"-£67,195,890.95"," £ (889,352,088.02)",-£0.23,245.411.763.867.806.000.000+00
