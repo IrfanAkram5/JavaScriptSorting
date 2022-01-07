@@ -1,0 +1,6 @@
+# Exclude everything in the includes directory
+includes/
+python_modules_for_util_pgm/
+
+#Exclude local vs code setting files
+.vscode/

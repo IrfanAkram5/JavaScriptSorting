@@ -9,12 +9,13 @@ function loadTableData(event) {
     let filename = fullFileName = "";
     filename = event.srcElement.name;
     fullFileName = filename.concat(".html");
+    fullFilePath = "HTML_Test_Files/".concat(fullFileName)
 
     const h2_title = document.getElementById("HeadingH2");
     let h2_text = "Loading ".concat(filename, ".......");
     h2_title.innerHTML = h2_text;
 
-    fetch(fullFileName)
+    fetch(fullFilePath)
         .then((response) => {
             return response.text()
         })
