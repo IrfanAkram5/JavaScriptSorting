@@ -1,5 +1,5 @@
 # JavaScriptSorting
-Sort text and numbers in JS tables efficiently.  
+Sort text and numbers in JS tables efficiently. See a demo at https://irfanakram5.github.io/JavaScriptSorting/
 
 ## TL;DR
 
@@ -13,7 +13,7 @@ Simply add an onclick attribute to the headings' table row along with the approp
 
 Does not do multi-column sort(yet!).
 
-Fast but see performance section for caveats. The limiting factor for responsiveness is not the sorting but the layout rendering times for very large tables.
+Fast but see performance section for caveats. The limiting factor for responsiveness is not the sorting but the layout rendering times for very large tables. From the [demo](https://irfanakram5.github.io/JavaScriptSorting/), you can the time various parts of the scripts take.  The balance is system render and layout time.
 
 ## Requirements
 
@@ -162,11 +162,11 @@ Internally, the function uses the `Array.prototype.sort()` method to sort the co
 | PoEm                | 940             | grrrr        | 245609103 | 4.33388E+20 | 433,387,512,598,271,000,000.00 | PoEm                  | -£913,463,328.55 |  £ (12,052,649.43)  | £ 158.095.168,71  |
 | halFwAY             | 264             | 629.0290062  | 480684850 | 3.05075E+20 | 305,075,417,621,948,000,000.00 | halFwAY               | £636,864,862.75  |  £ 12,478,937.45    | (                 |
 
-... with 100, 1000 and 10 000 rows of randomized values all fully rendered/displayed in the browser.  Anything up to 1000 rows fully displayed should be no issue for any modern latop in terms of responsiveness, regardless of processor.  i.e. you click on a column heading and in human terms, the full response cycle post click of process click, parse values, sort values, rebuild DOM tree and display appears instantaneous.  The responsiveness issue only comes into play with large table ( over 10 000 rows ) and 10+ columns.  In this scenario, table rendering is 80%-90% of the total elapsed time.  Few columns will reduce it.  In the test folder, there is a 10k file with 2 cols and a 10k file with 11 columns.  The response for 2 column file is about 50% faster.
+... with 100, 1000 and 10 000 rows of randomized values all fully rendered/displayed in the browser.  Anything up to 1000 rows fully displayed should be no issue for any modern latop in terms of responsiveness, regardless of processor.  i.e. you click on a column heading and in human terms, the full response cycle post click of process click, parse values, sort values, rebuild DOM tree and display appears instantaneous.  The responsiveness issue only comes into play with large table ( over 10 000 rows ) and 10+ columns.  In this scenario, table rendering is 80%-90% of the total elapsed time.  Fewer columns will reduce it.  In the test folder(and available on the [demo](https://irfanakram5.github.io/JavaScriptSorting/)), there is a 10k file with 2 cols and a 10k file with 11 columns.  The response for 2 column file is about 50% faster.
 
-For very large tables (10k rows and over), you would need to decide whether the total response time is acceptable or not.  If not, you will need to implement some sort of pagination where the total table is kept on the server or client side in a cache, and then generate on the fly the necessary number of row for whereever you are in the table.  Although a lot more overhead, it will still be more responsive than rendering very large tables.
+For very large tables (10k rows and over), you would need to decide whether the total response time is acceptable or not.  If not, you will need to implement some sort of pagination where the total table is kept on the server or client side in a cache, and then generate on the fly the necessary number of row for whereever you are in the table.  Although a lot more overhead, it will still be more responsive than rendering very large tables.  This sorting script **is not** designed for that scenario.
 
-See the demo page at[tbc] to see different response times for different volumes of data.
+View the [demo](https://irfanakram5.github.io/JavaScriptSorting/) page to see different response times for different volumes of data.
 
 
 ## Contributions
